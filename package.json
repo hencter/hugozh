@@ -2,9 +2,10 @@
   "name": "hugozh-tooling",
   "private": true,
   "type": "module",
-  "description": "hugozh.cn（Hugo 中文文档）的本地工具依赖：仅用于品牌资产生成与 Playwright 回归测试。",
+  "description": "hugozh.cn（Hugo 中文文档）的本地工具依赖：仅用于品牌资产生成、IndexNow 提交与 Playwright 回归测试。",
   "scripts": {
     "brand": "node .translation/gen-brand-assets.mjs",
+    "indexnow": "node .deploy/indexnow.mjs",
     "test:sidebar": "node .testing/sidebar-check.mjs",
     "test:demo": "node .testing/demo-check.mjs",
     "test:brand": "node .testing/brand-check.mjs"

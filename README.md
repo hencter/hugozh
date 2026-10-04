@@ -82,9 +82,10 @@ hugozh/                                   ← 仓库根 = 站点根
 ├── .agents/skills/hugo-static-site/        # 面向 AI 代理的技能包（SKILL.md + 10 篇 references）
 ├── .translation/                        # 翻译作业手册、审计脚本、品牌资产生成
 ├── .testing/                            # Playwright 回归（ui / search / sidebar / demo-check）
-└── package.json                         # 仅用于品牌资产生成与回归测试的 Node 依赖
+├── .deploy/                             # 发布相关：IndexNow 提交脚本
+└── package.json                         # 仅用于品牌资产生成、发布提交与回归测试的 Node 依赖
 
-（`.git`、`node_modules/`、`public/`、`resources/` 等未列出；`.agents/`、`.translation/`、`.testing/`
+（`.git`、`node_modules/`、`public/`、`resources/` 等未列出；`.agents/`、`.translation/`、`.testing/`、`.deploy/`
   是点开头的工具目录，既不出现在 Hugo 的构建里，也不影响站点结构。）
 ```
 
@@ -289,9 +290,18 @@ Hugo 自带的一批短代码**不需要站点提供模板**就能调用。`/sho
 - **结构化数据的坑**：在 `<script type="application/ld+json">` 里写 `{{ $data | jsonify }}`，Go 会把已序列化的字符串当 JS 字符串字面量再编码一次，输出成 `"{…}"`，结构化数据随即失效。正确做法是把**对象**交给模板（`{{ $data }}`），让 JS 上下文做净化序列化；依据 <https://gohugo.io/functions/safe/js/>。
 - **验证方式**：构建后从 `public/index.html` 取出 JSON-LD 交给真正的 JSON 解析器解析一遍——标签存在不等于数据可用。
 
+### 发布后主动提交（IndexNow）
+
+`robots.txt` 与 `sitemap.xml` 只解决「允许抓取」和「列出 URL」，不解决「多快被发现」。本站用 IndexNow 主动推送：
+
+- **归属证明**：`static/<key>.txt`，文件内容就是 key 本身。构建后发布到站点根（`https://hugozh.cn/<key>.txt`），IndexNow 靠它验证域名归属；key 为 8–128 位，只允许 `a-z A-Z 0-9 -`。
+- **提交脚本**：`npm run indexnow`（即 [`.deploy/indexnow.mjs`](.deploy/indexnow.mjs)）。它自动在 `static/` 里发现 key 文件、读 `public/sitemap.xml`，按官方上限每批 ≤10,000 条 POST 到 `api.indexnow.org`；`--dry-run` 只看不发，`--limit N` 小批量试跑，`--endpoint` 可换成 bing/yandex 等单家端点。
+- **协议依据**：<https://www.indexnow.org/documentation>（请求格式、返回码）与 <https://www.indexnow.org/faq>（官方明确：**整站新上线或迁移时可以一次性提交全部 URL**，日常则只提交有实际改动的 URL，同一 URL 不要反复提交）。
+- **站长平台归属验证**：走 `hugo.toml` 的 `[params.verification]`——填 Google / Bing 给的 content 值即输出对应 meta 标签；若用「HTML 文件」方式，把平台下载的文件直接放进 `static/` 即可，不必改模板（两项都留空时零输出）。
+
 ## 版本控制与日期
 
-站点源码由 Git 管理（仓库根就是站点根；`.agents/skills/`、`.translation/`、`.testing/` 也在同一仓库内）。产出物不入库：
+站点源码由 Git 管理（仓库根就是站点根；`.agents/skills/`、`.translation/`、`.testing/`、`.deploy/` 也在同一仓库内）。产出物不入库：
 
 ```gitignore
 public/
