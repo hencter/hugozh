@@ -84,6 +84,12 @@ const vectors = [
   { q: "渲染钩子", expect: "/render-hooks/" },
   { q: "分页", expect: "/templates/pagination/" },
   { q: "短代码", expect: "/shortcodes/" },
+  // 上面几条中文查询的标题恰好与查询词整串相等（走 `t === q` 分支）或只差后缀（前缀分支），
+  // 覆盖不到中文方案真正的主张——「没有词边界，按去空格子串匹配」。下面四条专门盯这条路径：
+  { q: "元数据", expect: "/content-management/front-matter/" },      // 查询词落在标题中部（60 分分支）
+  { q: "钩子", expect: "/quick-reference/glossary/render-hook/" },   // 单字中文 + 中部子串
+  { q: "编码函数", expect: "/functions/encoding/base64decode/" },     // 只靠「章节名」(22 分)命中，标题里没有这个词
+  { q: "前置 元数据", expect: "/content-management/front-matter/" },  // 带空格：钉住 norm() 的去空格行为
 ];
 
 console.log("\n测试向量（期望命中前 5）：");

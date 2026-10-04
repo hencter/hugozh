@@ -449,7 +449,7 @@ hugo server --port 1515 --noBuildLock
 node .testing/ui-check.mjs        # 30 项断言
 
 # 3) 搜索排序（不需要浏览器，只读 search.json）
-node .testing/search-check.mjs    # 10 条查询向量 + 4 项排序
+node .testing/search-check.mjs    # 14 条查询向量 + 4 项排序
 
 # 4) 侧栏激活态回归
 node .testing/sidebar-check.mjs   # 6 个层级 + 点击跳转后保持高亮
