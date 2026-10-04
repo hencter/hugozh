@@ -54,6 +54,14 @@ theme = ["hugo-docs-theme-zh", "hugo-docs-theme"]
   ogImageHeight = 630
   twitterHandle = ""      # 如 "@gohugoio"，用于 twitter:site
 
+# 站长平台所有权验证（head.html 读取；两项都留空即完全不输出）。
+#   · 「HTML 标记」方式：在 Google Search Console / Bing 网站管理员工具里复制 content 值填到下面；
+#   · 「HTML 文件」方式：不改这里，把平台下载的文件（google…html / BingSiteAuth.xml）放进 static/ 即可。
+# 验证只影响站长工具能否读取抓取数据与提交 sitemap，不影响页面收录本身。
+[params.verification]
+  # google = "…"
+  # bing   = "…"
+
 # 首页落地页的「按任务分流」入口卡：想改内容时只动这里，不用碰模板。
 # 每张卡：title（一句话任务）+ desc（达成什么）+ path（主入口）+ more（次要入口，0–3 个）。
 [[params.home.cards]]
