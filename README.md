@@ -30,6 +30,17 @@ Hugo 极快、极稳，但中文世界的入门资料零散；而真正卡住人
 
 在 0.158 之前的 Hugo 上，`locale` 键会被忽略（不影响构建与输出）；模板不依赖 0.158+ 的 `site.Language.Locale`，语言标签由 `[params] htmlLang` 提供，中文日期格式由中文叠加主题的 `[params] dateFormat` 提供。因此**部署平台自带的旧版 Hugo（如 EdgeOne Pages 的 0.147.5）可直接构建本站**。
 
+## 安装 Hugo
+
+构建命令假定 `hugo` 已在 PATH 中。各平台安装步骤见译文章节：
+
+- [Windows](content/installation/windows.md)（Winget / Chocolatey / Scoop 等）
+- [macOS](content/installation/macos.md)
+- [Linux](content/installation/linux.md)
+- [BSD](content/installation/bsd.md)（FreeBSD 的 pkg / pkgin）
+
+在线阅读：<https://hugozh.cn/installation/>。
+
 ## 快速开始
 
 所有命令都在**仓库根目录**（即本 README 所在目录）执行，路径均为相对路径：
