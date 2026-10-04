@@ -10,6 +10,10 @@ source = "https://gohugo.io/functions/cast/tostring/"
 signatures = ["cast.ToString INPUT"]
 returnType = "string"
 aliases = ["string"]
+
+[[params.examples]]
+id    = "cast/to-string-types"
+title = "把数字与布尔值转成字符串"
 +++
 
 ## 这一页解决什么问题
@@ -77,23 +81,9 @@ aliases = ["string"]
 
 ## 完整示例：把数字与布尔值转成字符串
 
-```go-html-template {file="layouts/_partials/price.html"}
-{{ $price := 11.9 }}
-{{ $hex := 0x11 }}
-<p>价格：{{ string $price }} 元</p>
-<p>十六进制：{{ string $hex }}</p>
-<p>拼接：{{ printf "%s-%s" (string 11) (string 0b11) }}</p>
-<p>空值：{{ string nil }}｜布尔：{{ string true }}</p>
-```
+下面四行是本站构建时**真实执行**的结果（模板文件在 `layouts/partials/examples/cast/to-string-types.html`）：
 
-Hugo 渲染为（变量赋值行本身会留下空行，这里省略）：
-
-```html
-<p>价格：11.9 元</p>
-<p>十六进制：17</p>
-<p>拼接：11-3</p>
-<p>空值：｜布尔：true</p>
-```
+{{< examples >}}
 
 **你应当看到什么**：`0x11` 这种**不带引号**的字面量先被求值成 17，再转成 `"17"`；`nil` 得到空字符串而不是报错；布尔得到 `"true"`。把 `$hex` 写成 `"0x11"`（加引号）输出会变成 `0x11`——这就是上面「规律只有一条」那句话的实际后果。
 

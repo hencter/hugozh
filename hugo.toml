@@ -46,7 +46,7 @@ theme = ["hugo-docs-theme-zh", "hugo-docs-theme"]
   repoURL = "https://github.com/hencter/hugozh"   # 公开仓库地址；显示为首页「查看源码」按钮
   upstream = "https://gohugo.io/"
   upstreamRepo = "https://github.com/gohugoio/hugoDocs"
-  version = "v1.2.0"      # 站点版本，显示在页脚；与 Git tag 对应
+  version = "v1.3.0"      # 站点版本，显示在页脚；与 Git tag 对应
 
   # SEO：留空即不输出对应标签
   ogImage = "/images/og-image.png"        # 社交分享图（1200×630，由 .translation/gen-brand-assets.py 生成）

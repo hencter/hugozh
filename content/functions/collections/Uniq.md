@@ -10,6 +10,10 @@ source = "https://gohugo.io/functions/collections/uniq/"
 signatures = ["collections.Uniq SLICE"]
 returnType = "[]any"
 aliases = ["uniq"]
+
+[[params.examples]]
+id    = "collections/uniq-tags"
+title = "标签去重后再排序"
 +++
 
 ## 这一页解决什么问题
@@ -41,24 +45,9 @@ aliases = ["uniq"]
 
 ## 完整示例：标签去重后再排序
 
-```go-html-template {file="layouts/_partials/all-tags.html"}
-{{ $tags := slice "Hugo" "Go" "Hugo" "模板" "Go" }}
-<p>原始：{{ $tags }}</p>
-<p>去重：{{ $tags | uniq }}</p>
-<p>去重后排序：{{ $tags | uniq | collections.Sort }}</p>
-<p>数量：{{ len $tags }} → {{ len ($tags | uniq) }}</p>
-<p>空切片：{{ uniq (slice) }}</p>
-```
+下面五行是本站构建时**真实执行**的结果（模板文件在 `layouts/partials/examples/collections/uniq-tags.html`）：
 
-Hugo 渲染为：
-
-```html
-<p>原始：[Hugo Go Hugo 模板 Go]</p>
-<p>去重：[Hugo Go 模板]</p>
-<p>去重后排序：[Go Hugo 模板]</p>
-<p>数量：5 → 3</p>
-<p>空切片：[]</p>
-```
+{{< examples >}}
 
 **你应当看到什么**：`uniq` 保留了首次出现的顺序（`Hugo` 在 `Go` 之前）；再接 `collections.Sort` 才变成排序结果；空切片不报错，直接返回空切片。
 

@@ -10,6 +10,10 @@ source = "https://gohugo.io/functions/collections/first/"
 signatures = ["collections.First N SLICE|STRING"]
 returnType = "any"
 aliases = ["first"]
+
+[[params.examples]]
+id    = "collections/first-top-posts"
+title = "只显示前 2 篇"
 +++
 
 ## 这一页解决什么问题
@@ -78,31 +82,9 @@ aliases = ["first"]
 
 ## 完整示例：只显示前 2 篇
 
-`first` 不依赖页面结构，用 `slice` 就能直接验证：
+`first` 不依赖页面结构，用 `slice` 就能直接验证——下面是本站构建时**真实执行**的结果（模板文件在 `layouts/partials/examples/collections/first-top-posts.html`）：
 
-```go-html-template {file="layouts/_partials/top-posts.html"}
-{{ $titles := slice "第一篇" "第二篇" "第三篇" "第四篇" }}
-<ul>
-  {{ range $titles | first 2 }}
-    <li>{{ . }}</li>
-  {{ end }}
-</ul>
-<p>总共 {{ len $titles }} 篇，显示 {{ len ($titles | first 2) }} 篇</p>
-<p>取 99 篇（超过总数）：{{ len ($titles | first 99) }} 篇</p>
-<p>取 0 篇：{{ len ($titles | first 0) }} 篇</p>
-```
-
-Hugo 渲染为（`range` 循环本身会留下空行，这里省略）：
-
-```html
-<ul>
-  <li>第一篇</li>
-  <li>第二篇</li>
-</ul>
-<p>总共 4 篇，显示 2 篇</p>
-<p>取 99 篇（超过总数）：4 篇</p>
-<p>取 0 篇：0 篇</p>
-```
+{{< examples >}}
 
 **你应当看到什么**：`first 2` 只输出前两项；`N` 超过元素总数时**不报错**，返回整个切片；`N` 为 0 得到空切片。
 

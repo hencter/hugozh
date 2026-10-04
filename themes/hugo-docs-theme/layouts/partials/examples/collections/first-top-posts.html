@@ -1,0 +1,9 @@
+{{ $titles := slice "第一篇" "第二篇" "第三篇" "第四篇" }}
+<ul>
+  {{ range $titles | first 2 }}
+    <li>{{ . }}</li>
+  {{ end }}
+</ul>
+<p>总共 {{ len $titles }} 篇，显示 {{ len ($titles | first 2) }} 篇</p>
+<p>取 99 篇（超过总数）：{{ len ($titles | first 99) }} 篇</p>
+<p>取 0 篇：{{ len ($titles | first 0) }} 篇</p>

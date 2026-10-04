@@ -7,7 +7,7 @@
 | 站点 | <https://hugozh.cn/> —— 21 个一级章节、949 个 Markdown 文件（上游 19 章 1:1 翻译 + 2 个原创章节：技能包与可运行示例） |
 | 技能包 | [`.agents/skills/hugo-static-site/`](.agents/skills/hugo-static-site/) —— MIT 许可，可单独取用；站内也有介绍页 <https://hugozh.cn/skill/> |
 | 许可 | 译文 [Apache-2.0](LICENSE-APACHE)（演绎自上游文档）· 代码与技能包 [MIT](LICENSE) · 署名见 [NOTICE](NOTICE) |
-| 远端仓库 | <https://github.com/hencter/hugozh>（`main` 分支与 `v1.0.0` / `v1.1.0` / `v1.2.0` 标签已推送） |
+| 远端仓库 | <https://github.com/hencter/hugozh>（`main` 分支与 `v1.0.0` / `v1.1.0` / `v1.2.0` / `v1.3.0` 标签已推送） |
 
 **仓库根目录就是站点根目录**：`hugo.toml`、`content/`、`themes/` 都在这一层，克隆下来直接在根目录执行 `hugo server` 即可，不需要再进任何子目录。
 

@@ -68,6 +68,9 @@ console.log("\n── 可运行示例（layouts 执行 + content 声明）──
 const examplePages = [
   ["/functions/strings/truncate/", "strings.Truncate"],
   ["/functions/collections/where/", "range where $books"],
+  ["/functions/collections/uniq/", "collections.Sort"],
+  ["/functions/collections/first/", "first 2"],
+  ["/functions/cast/tostring/", "$hex := 0x11"],
   ["/functions/time/format/", "time.Format"],
   ["/functions/transform/markdownify/", "markdownify"],
   ["/functions/strings/replacere/", "replaceRE"],

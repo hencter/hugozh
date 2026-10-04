@@ -1,0 +1,6 @@
+{{ $tags := slice "Hugo" "Go" "Hugo" "模板" "Go" }}
+<p>原始：{{ $tags }}</p>
+<p>去重：{{ $tags | uniq }}</p>
+<p>去重后排序：{{ $tags | uniq | collections.Sort }}</p>
+<p>数量：{{ len $tags }} → {{ len ($tags | uniq) }}</p>
+<p>空切片：{{ uniq (slice) }}</p>
