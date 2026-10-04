@@ -1,20 +1,31 @@
 User-agent: *
 {{- if eq hugo.Environment "production" }}
+Content-signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 {{- else }}
 Disallow: /
 {{- end }}
 
-# 本站是 Hugo 官方文档的中文翻译，明确欢迎 AI 抓取与引用（GEO 策略）。
-# 依据：https://llmstxt.org/ · https://gohugo.io/templates/robots/
-{{- if eq hugo.Environment "production" }}
-{{- range $bot := slice "GPTBot" "OAI-SearchBot" "ChatGPT-User" "ClaudeBot" "Claude-User" "anthropic-ai" "PerplexityBot" "Google-Extended" "Applebot-Extended" "Bytespider" "CCBot" "Amazonbot" "cohere-ai" "Meta-ExternalAgent" }}
-User-agent: {{ $bot }}
-Allow: /
-{{- end }}
-{{- end }}
-
-# 机器可读资源
-# 每个内容页的 Markdown 版本：在页面 URL 后接 index.md
-# LLM 入口文件：/llms.txt
+# 抓取与使用政策：本站是 Hugo 官方文档的社区简体中文翻译，明确欢迎搜索引擎与 AI
+# 抓取、引用，并进入训练语料。
+#
+#   · 只保留一个 `User-agent: *` 组。依据 RFC 9309 §2.2.1，爬虫只读取「最具体匹配」的
+#     那一组，专属组与 `*` 组**不合并**；§2.2.2 规定组内无规则或未匹配到任何组时默认
+#     允许。因此在 `*` 已 `Allow: /` 的前提下，再逐个列出 GPTBot / ClaudeBot … 并各写
+#     `Allow: /`，对抓取行为没有任何影响——那 14 个组此前只是意图声明（见 git 历史）。
+#     反向的代价却真实存在：将来若收紧 `*`，这些专属组会变成永久豁免。需要按 UA 做
+#     差异化（例如只放行「引用类」爬虫、屏蔽「训练类」）时再加，届时也必须在每个组里
+#     重复声明 Content-signal。
+#
+#   · `Content-signal` 是 Cloudflare 2025-09 提出的 robots.txt 扩展字段（厂商提案，
+#     非正式标准），表达「抓取之后可以用作什么」，三个信号取值 yes/no：
+#       search   建索引、返回链接与短摘要（不含 AI 生成的搜索摘要）
+#       ai-input 把内容喂给模型（RAG / grounding / 生成式搜索答案）
+#       ai-train 训练与微调
+#     三项都写 yes = 明确欢迎。注意：目前只有 Cloudflare 自家系统明确读取该字段，
+#     没有爬虫厂商公开承认支持；它表达的是意愿，不是技术反制。
+#     依据：https://blog.cloudflare.com/content-signals-policy/
+#           https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/
+#
+#   · 机器可读资源：每个内容页的 Markdown 版本 = 页面 URL 后接 index.md；LLM 入口 = /llms.txt
 Sitemap: {{ "sitemap.xml" | absURL }}
